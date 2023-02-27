@@ -10,3 +10,18 @@ type Resources interface {
 	GetSomeDBConnection() *sql.DB
 }
 
+func (r *resources) GetMyInt() int {
+
+	return r.myInt
+}
+
+func (r *resources) GetAFloat() float64 {
+
+	return r.aFloat
+}
+
+func (r *resources) GetSomeDBConnection() *sql.DB {
+
+	return r.someDBConnection
+}
+

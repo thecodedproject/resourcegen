@@ -8,8 +8,6 @@ import (
 	"github.com/iancoleman/strcase"
 
 	"github.com/thecodedproject/gopkg"
-
-	"fmt"
 )
 
 var (
@@ -69,11 +67,7 @@ func makeImplFile(
 
 	funcs := make([]gopkg.DeclFunc, 0, len(resourceStruct.Fields))
 
-	fmt.Println(resourceStruct)
-
 	for _, field := range resourceStruct.Fields {
-
-		fmt.Println("field:", field)
 
 		funcs = append(funcs, gopkg.DeclFunc{
 			Name: "Get" + strcase.ToCamel(field.Name),
@@ -82,6 +76,14 @@ func makeImplFile(
 					Type: field.Type,
 				},
 			},
+			Receiver: gopkg.FuncReceiver{
+				VarName: "r",
+				TypeName: structName,
+				IsPointer: true,
+			},
+			BodyTmpl: `
+	return r.` + field.Name + `
+`,
 		})
 	}
 
@@ -96,6 +98,7 @@ func makeImplFile(
 				},
 			},
 		},
+		Functions: funcs,
 	}
 
 
