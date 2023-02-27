@@ -1,0 +1,4 @@
+package example_no_resources
+
+type Resources interface{}
+

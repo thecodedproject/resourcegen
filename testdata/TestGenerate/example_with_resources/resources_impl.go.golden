@@ -1,0 +1,12 @@
+package example_with_resources
+
+import (
+	sql "database/sql"
+)
+
+type Resources interface {
+	GetMyInt() int
+	GetAFloat() float64
+	GetSomeDBConnection() *sql.DB
+}
+
